@@ -21,14 +21,12 @@ function buttonsUtility() {
 			document.getElementById(i).addEventListener('click', loseGame);
 		}
 	}
-	
 }
 
 function winGame() {
 	for(let i = 1; i <= difficulty; ++i) {
 		document.getElementById(i).disabled = true;
 	}
-
 	const winParagraph = document.createElement('p');
 	winParagraph.textContent = 'Congrats you choose right!';
 	winParagraph.setAttribute('class', 'win');
@@ -46,7 +44,6 @@ function loseGame() {
 	for(let i = 1; i <= difficulty; ++i) {
 		document.getElementById(i).disabled = true;
 	}
-
 	const loseParagraph = document.createElement('p');
 	loseParagraph.textContent = 'Sorry, you just LOST the game!';
 	loseParagraph.setAttribute('class', 'lose');
