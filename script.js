@@ -16,21 +16,23 @@ function buttonsUtility() {
 	for (let i = 1; i <= difficulty; ++i) {
 		let zero = 0;
 		if (i === randomNumber) {
-			document.getElementById(i).addEventListener('click', winGame);
+			document.getElementById(i).addEventListener('click', function() {winLoseGame(true);});
 		} else {
-			document.getElementById(i).addEventListener('click', loseGame);
+			document.getElementById(i).addEventListener('click', function() {winLoseGame(false);});
 		}
 	}
 }
 
-function winGame() {
-	for(let i = 1; i <= difficulty; ++i) {
-		document.getElementById(i).disabled = true;
+function winLoseGame(winLose) {
+	const winLoseParagraph = document.createElement('p');
+	if (winLose === true) {
+		winLoseParagraph.textContent = 'Congrats you choose right!';
+		winLoseParagraph.setAttribute('class', 'win');
+	} else {
+		winLoseParagraph.textContent = 'Sorry, you just LOST the game!';
+		winLoseParagraph.setAttribute('class', 'lose');
 	}
-	const winParagraph = document.createElement('p');
-	winParagraph.textContent = 'Congrats you choose right!';
-	winParagraph.setAttribute('class', 'win');
-	document.body.appendChild(winParagraph);
+	document.body.appendChild(winLoseParagraph);
 
 	const restartButton = document.createElement('button');
 	restartButton.textContent = 'PLAY AGAIN';
@@ -38,23 +40,9 @@ function winGame() {
 	restartButton.setAttribute('class', 'restartButton');
 	document.getElementById('restart').appendChild(restartButton);
 	restartButton.addEventListener('click', resetGame);
-}
-
-function loseGame() {
 	for(let i = 1; i <= difficulty; ++i) {
 		document.getElementById(i).disabled = true;
 	}
-	const loseParagraph = document.createElement('p');
-	loseParagraph.textContent = 'Sorry, you just LOST the game!';
-	loseParagraph.setAttribute('class', 'lose');
-	document.body.appendChild(loseParagraph);
-
-	const restartButton = document.createElement('button');
-	restartButton.textContent = 'PLAY AGAIN';
-	restartButton.setAttribute('id', 'restartButton');
-	restartButton.setAttribute('class', 'restartButton');
-	document.getElementById('restart').appendChild(restartButton);
-	restartButton.addEventListener('click', resetGame);
 }
 
 function resetGame() {
